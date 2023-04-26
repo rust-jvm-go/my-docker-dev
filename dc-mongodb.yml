@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb-server
+    restart: always
+    command: [--auth]
+    environment:
+      - MONGO_INITDB_DATABASE=root_db
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ~/DockerVolumes/initiative/mongodb:/data/db
+      - ./docker-entrypoint-initdb.d/mongodb-init.js:/docker-entrypoint-initdb.d/mongodb-init.js:ro
+    ports:
+      - "27017:27017"
+    networks:
+      - mongodb-network
+
+  mongodb-express:
+    image: mongo-express
+    container_name: mongodb-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_BASICAUTH_USERNAME=${ME_CONFIG_BASICAUTH_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ME_CONFIG_BASICAUTH_PASSWORD}
+      - ME_CONFIG_MONGODB_URL=mongodb://${ME_CONFIG_BASICAUTH_USERNAME}:${ME_CONFIG_BASICAUTH_PASSWORD}@mongodb-server:27017/?authSource=local_db
+    depends_on:
+      - mongodb
+    networks:
+      - mongodb-network
+
+networks:
+  mongodb-network:

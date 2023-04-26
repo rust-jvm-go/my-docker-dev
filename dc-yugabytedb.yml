@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  yb-master-server:
+    image: yugabytedb/yugabyte:2.16.3.0-b43
+    container_name: yb-master-server
+    volumes:
+      - ~/DockerVolumes/initiative/yugabytedb/:/home/yugabyte/yb_data
+    command: [ "/home/yugabyte/bin/yugabyted",
+               "start",
+               "--base_dir=/home/yugabyte/yb_data",
+               "--daemon=false"
+    ]
+    ports:
+      - "7000:7000"
+      - "9000:9000"
+      - "9042:9042"
+      - "5433:5433"
+    networks:
+      - yugabyte-network
+
+networks:
+  yugabyte-network:
