@@ -1,6 +1,6 @@
 ### Intellij template
 .idea/
-.iml
+*.iml
 
 ### VisualStudioCode template
 .vscode/*
