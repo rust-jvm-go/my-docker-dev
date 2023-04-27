@@ -4,7 +4,7 @@ services:
     image: yugabytedb/yugabyte:2.16.3.0-b43
     container_name: yb-master-server
     volumes:
-      - ~/DockerVolumes/initiative/yugabytedb/:/home/yugabyte/yb_data
+      - ${YUGABYTE_VOLUME_DIR}:/home/yugabyte/yb_data
     command: [ "/home/yugabyte/bin/yugabyted",
                "start",
                "--base_dir=/home/yugabyte/yb_data",
