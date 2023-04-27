@@ -1,0 +1,14 @@
+= Environment (`.env`) setup
+
+=== # MongoDB
+
+`MONGO_INITDB_ROOT_USERNAME=` +
+`MONGO_INITDB_ROOT_PASSWORD=` +
+`MONGO_VOLUME_DIR=` # different than link:mongodb-mount-dir[`mongodb-mount-dir`]
+
+`ME_CONFIG_BASICAUTH_USERNAME=` +
+`ME_CONFIG_BASICAUTH_PASSWORD=`
+
+=== # YugabyteDB
+
+`YUGABYTE_VOLUME_DIR=`
