@@ -1,8 +1,12 @@
 version: "3.8"
+
+name: my-yugabytedb
+
 services:
-  yb-master-server:
+
+  yugabytedb-master:
     image: yugabytedb/yugabyte:2.16.3.0-b43
-    container_name: yb-master-server
+    container_name: yugabytedb-master
     volumes:
       - ${YUGABYTE_VOLUME_DIR}:/home/yugabyte/yb_data
     command: [ "/home/yugabyte/bin/yugabyted",
@@ -16,7 +20,7 @@ services:
       - "9042:9042"
       - "5433:5433"
     networks:
-      - yugabyte-network
+      - yugabytedb-network
 
 networks:
-  yugabyte-network:
+  yugabytedb-network:

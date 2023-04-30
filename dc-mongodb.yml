@@ -1,5 +1,9 @@
 version: "3.8"
+
+name: my-mongodb
+
 services:
+
   mongodb:
     image: mongo
     container_name: mongodb-server
