@@ -7,7 +7,6 @@ services:
   mongodb:
     image: mongo
     container_name: mongodb-server
-    restart: always
     command: [ "--auth" ]
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
@@ -23,7 +22,6 @@ services:
   mongodb-express:
     image: mongo-express
     container_name: mongodb-express
-    restart: always
     ports:
       - "8081:8081"
     environment:
