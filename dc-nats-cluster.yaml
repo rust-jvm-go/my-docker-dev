@@ -1,0 +1,28 @@
+version: "3.8"
+
+name: my-nats-cluster
+
+services:
+  nats-cluster-1:
+    image: nats
+    container_name: nats-cluster-1
+    ports:
+      - "8222:8222"
+    command: "--cluster_name NATS-CLUSTER --cluster nats://0.0.0.0:6222 --http_port 8222 "
+    networks: [ "nats-cluster-network" ]
+  nats-cluster-1_1:
+    image: nats
+    container_name: nats-cluster-1_1
+    command: "--cluster_name NATS-CLUSTER --cluster nats://0.0.0.0:6222 --routes=nats://ruser:T0pS3cr3t@nats:6222"
+    networks: ["nats-cluster-network"]
+    depends_on: [ "nats-cluster-1" ]
+  nats-cluster-1_2:
+    image: nats
+    container_name: nats-cluster-2_1
+    command: "--cluster_name NATS-CLUSTER --cluster nats://0.0.0.0:6222 --routes=nats://ruser:T0pS3cr3t@nats:6222"
+    networks: [ "nats-cluster-network" ]
+    depends_on: [ "nats-cluster-1" ]
+
+networks:
+  nats-cluster-network:
+    name: nats-cluster-network

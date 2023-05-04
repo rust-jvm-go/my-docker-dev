@@ -1,0 +1,17 @@
+version: "3.8"
+
+name: my-nats-single
+
+services:
+  nats-single:
+    image: nats
+    container_name: nats-single
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    command: "--cluster_name NATS-SINGLE --cluster nats://0.0.0.0:6222 --http_port 8222 "
+    networks: [ "nats-single-network" ]
+
+networks:
+  nats-single-network:
+    name: nats-single-network

@@ -24,3 +24,4 @@ services:
 
 networks:
   yugabytedb-network:
+    name: yugabytedb-network
