@@ -1,5 +1,7 @@
 = Environment (`.env`) setup
 
+Create `.env` file in link:docker-compose[`docker-compose`] directory. Then add the configuration for each service below.
+
 === # MongoDB
 
 `MONGO_INITDB_ROOT_USERNAME=` +

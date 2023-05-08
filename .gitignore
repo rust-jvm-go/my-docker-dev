@@ -16,5 +16,5 @@
 # Built Visual Studio Code Extensions
 *.vsix
 
-.env
+docker-compose/.env
 */**/.env
