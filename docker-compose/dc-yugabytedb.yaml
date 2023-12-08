@@ -11,6 +11,7 @@ services:
       - ${YUGABYTE_VOLUME_DIR}:/home/yugabyte/yb_data
     command: [ "/home/yugabyte/bin/yugabyted",
                "start",
+               "--ysql_enable_auth=true",
                "--base_dir=/home/yugabyte/yb_data",
                "--daemon=false"
     ]
