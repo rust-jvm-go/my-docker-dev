@@ -5,16 +5,10 @@ name: my-yugabytedb
 services:
 
   yugabytedb-master:
-    image: yugabytedb/yugabyte:2.16.3.0-b43
+    image: yugabytedb/yugabyte:latest
     container_name: yugabytedb-master
     volumes:
       - ${YUGABYTE_VOLUME_DIR}:/home/yugabyte/yb_data
-    command: [ "/home/yugabyte/bin/yugabyted",
-               "start",
-               "--ysql_enable_auth=true",
-               "--base_dir=/home/yugabyte/yb_data",
-               "--daemon=false"
-    ]
     ports:
       - "7000:7000"
       - "9000:9000"
@@ -22,6 +16,11 @@ services:
       - "5433:5433"
     networks:
       - yugabytedb-network
+    command: [ "/home/yugabyte/bin/yugabyted",
+               "start",
+               "--base_dir=/home/yugabyte/yb_data",
+               "--daemon=false"
+    ]
 
 networks:
   yugabytedb-network:
