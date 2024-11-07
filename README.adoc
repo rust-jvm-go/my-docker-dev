@@ -4,13 +4,13 @@ Create `.env` file in link:docker-compose[`docker-compose`] directory. Then add 
 
 === # MongoDB
 
-`MONGO_INITDB_ROOT_USERNAME=` +
-`MONGO_INITDB_ROOT_PASSWORD=` +
-`MONGO_VOLUME_DIR=` # different than link:mongodb-mount-dir[`mongodb-mount-dir`]
+`MONGODB_INITDB_ROOT_USERNAME=` +
+`MONGODB_INITDB_ROOT_PASSWORD=` +
+`MONGODB_VOLUME_DIR=` # different than link:mongodb-mount-dir[`mongodb-mount-dir`]
 
 `ME_CONFIG_BASICAUTH_USERNAME=` +
 `ME_CONFIG_BASICAUTH_PASSWORD=`
 
 === # YugabyteDB
 
-`YUGABYTE_VOLUME_DIR=`
+`YUGABYTEDB_VOLUME_DIR=`
