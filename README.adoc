@@ -7,6 +7,9 @@ Create `.env` file in link:docker-compose[`docker-compose`] directory. Then add 
 `MONGODB_INITDB_ROOT_USERNAME=` +
 `MONGODB_INITDB_ROOT_PASSWORD=` +
 `MONGODB_VOLUME_DIR=` # different than link:mongodb-mount-dir[`mongodb-mount-dir`]
+`MONGODB_APP_DATABASE=` +
+`MONGODB_APP_USERNAME=` +
+`MONGODB_APP_PASSWORD=`
 
 `ME_CONFIG_BASICAUTH_USERNAME=` +
 `ME_CONFIG_BASICAUTH_PASSWORD=`
@@ -14,3 +17,17 @@ Create `.env` file in link:docker-compose[`docker-compose`] directory. Then add 
 === # YugabyteDB
 
 `YUGABYTEDB_VOLUME_DIR=`
+
+=== # NATS
+
+`NATS_CLUSTER_USERNAME=` +
+`NATS_CLUSTER_PASSWORD=`
+
+== Running the stacks
+
+1. Copy `docker-compose/.env.example` (or create `docker-compose/.env`) and populate the variables listed above. The helper scripts load this exact file; they will fail fast if it is missing.
+2. Use the provided scripts from the repo root so they can locate the Compose files and env file automatically:
+   - `./mongodb_up.sh` / `./mongodb_stop.sh`
+   - `./nats-single_up.sh` / `./nats-single_stop.sh`
+   - `./yugabytedb_up.sh` / `./yugabytedb_stop.sh`
+3. Each `_up.sh` script ensures required volume directories exist and passes `--env-file` to `docker compose`. If you call `docker compose` manually, remember to specify `--env-file ./docker-compose/.env` so credentials and volume paths resolve correctly.

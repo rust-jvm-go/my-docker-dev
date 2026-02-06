@@ -18,3 +18,10 @@ services:
                "--base_dir=/home/yugabyte/yb_data",
                "--background=false"
     ]
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -fs http://localhost:7000/api/v1/health-check || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped

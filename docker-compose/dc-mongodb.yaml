@@ -9,6 +9,9 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_INITDB_ROOT_PASSWORD}
+      - MONGODB_APP_DATABASE=${MONGODB_APP_DATABASE}
+      - MONGODB_APP_USERNAME=${MONGODB_APP_USERNAME}
+      - MONGODB_APP_PASSWORD=${MONGODB_APP_PASSWORD}
     volumes:
       - ${MONGODB_VOLUME_DIR}:/data/db
       - ../mongodb-mount-dir/mongodb-init.js:/docker-entrypoint-initdb.d/mongodb-init.js:ro
@@ -16,6 +19,13 @@ services:
       - "27017:27017"
     networks:
       - mongodb-network
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --quiet --eval 'db.runCommand({ ping: 1 })'" ]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
 
   mongodb-express:
     image: mongo-express
@@ -32,9 +42,17 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=${ME_CONFIG_BASICAUTH_USERNAME}
       - ME_CONFIG_BASICAUTH_PASSWORD=${ME_CONFIG_BASICAUTH_PASSWORD}
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - mongodb-network
+    healthcheck:
+      test: [ "CMD", "wget", "-qO", "-", "http://localhost:8081" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
 
 networks:
   mongodb-network:
