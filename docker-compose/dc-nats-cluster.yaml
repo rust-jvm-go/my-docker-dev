@@ -1,4 +1,4 @@
-name: my-nats-cluster
+name: localdev-nats-cluster
 
 services:
   nats-cluster-1:

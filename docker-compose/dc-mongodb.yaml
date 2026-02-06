@@ -1,4 +1,4 @@
-name: my-mongodb
+name: localdev-mongodb
 
 services:
 

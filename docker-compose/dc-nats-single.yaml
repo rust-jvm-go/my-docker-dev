@@ -1,4 +1,4 @@
-name: my-nats-single
+name: localdev-nats-single
 
 services:
   nats-single:
