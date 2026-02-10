@@ -23,6 +23,12 @@ Create `.env` file in link:docker-compose[`docker-compose`] directory. Then add 
 `NATS_CLUSTER_USERNAME=` +
 `NATS_CLUSTER_PASSWORD=`
 
+=== # Neo4j
+
+`NEO4J_VOLUME_DIR=` +
+`NEO4J_USERNAME=` +
+`NEO4J_PASSWORD=`
+
 == Running the stacks
 
 1. Copy `docker-compose/.env.example` (or create `docker-compose/.env`) and populate the variables listed above. The helper scripts load this exact file; they will fail fast if it is missing.
@@ -30,4 +36,5 @@ Create `.env` file in link:docker-compose[`docker-compose`] directory. Then add 
    - `./mongodb_up.sh` / `./mongodb_stop.sh`
    - `./nats-single_up.sh` / `./nats-single_stop.sh`
    - `./yugabytedb_up.sh` / `./yugabytedb_stop.sh`
+   - `./neo4j_up.sh` / `./neo4j_stop.sh`
 3. Each `_up.sh` script ensures required volume directories exist and passes `--env-file` to `docker compose`. If you call `docker compose` manually, remember to specify `--env-file ./docker-compose/.env` so credentials and volume paths resolve correctly.
